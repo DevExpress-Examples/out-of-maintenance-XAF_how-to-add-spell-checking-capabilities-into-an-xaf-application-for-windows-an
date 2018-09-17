@@ -2,9 +2,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Demo.Module", "Demo.Module\Demo.Module.csproj", "{35F57F7D-051F-459F-9439-36F74076DD9F}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Demo.Win", "Demo.Win\Demo.Win.csproj", "{22782832-92C2-4D23-BCD0-F02FB9EFA4C6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Demo.Module", "Demo.Module\Demo.Module.csproj", "{35F57F7D-051F-459F-9439-36F74076DD9F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DevExpress.ExpressApp.SpellChecker.Win", "DevExpress.ExpressApp.SpellChecker.Win\DevExpress.ExpressApp.SpellChecker.Win.csproj", "{751F2BBE-F892-4498-B88D-0BBE5927DEBC}"
 EndProject
