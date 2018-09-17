@@ -20,6 +20,8 @@
 x64/
 x86/
 bld/
+bin/
+obj/
 [Oo]bj/
 [Ll]og/
 
