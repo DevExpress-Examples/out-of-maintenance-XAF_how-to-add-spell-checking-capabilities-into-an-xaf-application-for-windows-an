@@ -1,3 +1,9 @@
+<!-- default file list -->
+*Files to look at*:
+
+* [SpellCheckerInitializer.cs](./CS/Spelling.Win/SpellCheckerInitializer.cs)
+* **[SpellCheckerViewController.cs](./CS/Spelling.Win/SpellCheckerViewController.cs)**
+<!-- default file list end -->
 # How to add spell checking capabilities into an XAF application for Windows and the Web
 
 
