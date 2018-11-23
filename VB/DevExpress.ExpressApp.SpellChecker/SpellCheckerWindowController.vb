@@ -1,4 +1,5 @@
-﻿Imports System
+Imports Microsoft.VisualBasic
+Imports System
 Imports System.IO
 Imports System.Reflection
 Imports System.ComponentModel
@@ -9,8 +10,7 @@ Imports DevExpress.ExpressApp.Actions
 Namespace DevExpress.ExpressApp.SpellChecker
     Public MustInherit Class SpellCheckerWindowController
         Inherits WindowController
-
-        Private Shared lockObject As New Object()
+        Private Shared lockObject As Object = New Object()
         Private Const ActiveKeyCanCheckSpelling As String = "CanCheckSpelling"
         Public Sub New()
             CheckSpellingAction = New SimpleAction(Me, "CheckSpelling", PredefinedCategory.RecordEdit)
@@ -35,12 +35,12 @@ Namespace DevExpress.ExpressApp.SpellChecker
         End Sub
         Private Sub ReleaseSpellChecker()
             If TypeOf SpellCheckerComponent Is IDisposable Then
-                DirectCast(SpellCheckerComponent, IDisposable).Dispose()
+                CType(SpellCheckerComponent, IDisposable).Dispose()
                 SpellCheckerComponent = Nothing
             End If
         End Sub
         Private Sub Window_TemplateChanged(ByVal sender As Object, ByVal e As EventArgs)
-            Dim window As Window = DirectCast(sender, Window)
+            Dim window As Window = CType(sender, Window)
             If window.Template Is Nothing Then
                 ReleaseSpellChecker()
             End If
@@ -75,7 +75,7 @@ Namespace DevExpress.ExpressApp.SpellChecker
         ''' <returns></returns>
         Public Overridable Function CanCheckSpelling(ByVal context As TemplateContext, ByVal template As Object) As Boolean
             Dim args As New QueryCanCheckSpellingEventArgs(context, template)
-            Dim isTargetTemplate As Boolean = (template IsNot Nothing) AndAlso (context Is TemplateContext.ApplicationWindow OrElse context Is TemplateContext.PopupWindow OrElse context Is TemplateContext.View)
+            Dim isTargetTemplate As Boolean = (template IsNot Nothing) AndAlso (context = TemplateContext.ApplicationWindow OrElse context = TemplateContext.PopupWindow OrElse context = TemplateContext.View)
             args.Cancel = Not (SpellCheckerOptions.Enabled AndAlso isTargetTemplate)
             OnQueryCanCheckSpelling(args)
             Return Not args.Cancel
@@ -217,7 +217,7 @@ Namespace DevExpress.ExpressApp.SpellChecker
                 filePathPrefix = PathHelper.GetApplicationFolder()
 
             End If
-            Return New SpellCheckerDictionaryFileInfo(filePathPrefix & SpellCheckerOptions.AlphabetPath, filePathPrefix & (If(isCustom, SpellCheckerOptions.CustomDictionaryPath, SpellCheckerOptions.DefaultDictionaryPath)),If(isCustom, String.Empty, (filePathPrefix & SpellCheckerOptions.GrammarPath)))
+            Return New SpellCheckerDictionaryFileInfo(filePathPrefix & SpellCheckerOptions.AlphabetPath, filePathPrefix & (If(isCustom, SpellCheckerOptions.CustomDictionaryPath, SpellCheckerOptions.DefaultDictionaryPath)), If(isCustom, String.Empty, (filePathPrefix & SpellCheckerOptions.GrammarPath)))
         End Function
 
         ''' <summary>
@@ -226,7 +226,7 @@ Namespace DevExpress.ExpressApp.SpellChecker
         ''' <param name="isCustom"></param>
         ''' <returns></returns>
         'TODO Dennis: Consider re-using the DictionaryHelper.CreateEnglishDictionary method instead.
-        <Browsable(False), EditorBrowsable(EditorBrowsableState.Never)> _
+        <Browsable(False), EditorBrowsable(EditorBrowsableState.Never)>
         Protected Overridable Function GetDictionaryStreamInfo(ByVal isCustom As Boolean) As SpellCheckerDictionaryStreamInfo
             Dim resourceAssembly As System.Reflection.Assembly = GetType(SpellCheckerBase).Assembly
             Dim resourcePrefix As String = resourceAssembly.GetName().Name
@@ -235,7 +235,7 @@ Namespace DevExpress.ExpressApp.SpellChecker
                 Dim alphabethStream As Stream = New MemoryStream(System.Text.Encoding.Unicode.GetBytes(alphabeth))
                 Dim dictionaryStream As Stream = resourceAssembly.GetManifestResourceStream("DevExpress.XtraSpellChecker.Core.Dictionary.american.xlg")
                 Dim grammarStream As Stream = resourceAssembly.GetManifestResourceStream("DevExpress.XtraSpellChecker.Core.Dictionary.english.aff")
-                Return New SpellCheckerDictionaryStreamInfo(alphabethStream,If(isCustom, New FileStream(PathHelper.GetApplicationFolder() & SpellCheckerOptions.CustomDictionaryPath, FileMode.OpenOrCreate, FileAccess.ReadWrite), dictionaryStream),If(isCustom, Nothing, grammarStream))
+                Return New SpellCheckerDictionaryStreamInfo(alphabethStream, If(isCustom, New FileStream(PathHelper.GetApplicationFolder() + SpellCheckerOptions.CustomDictionaryPath, FileMode.OpenOrCreate, FileAccess.ReadWrite), dictionaryStream), If(isCustom, Nothing, grammarStream))
             Catch ex As Exception
                 Throw New ArgumentException(String.Format("Cannot load a dictionary from the {0} assembly by the specified name. Make sure that the dictionary file's BuildAction is set to EmbeddedResource and its name includes the file extension.", resourceAssembly.GetName().Name), ex)
             End Try
@@ -243,27 +243,11 @@ Namespace DevExpress.ExpressApp.SpellChecker
         ''' <summary>
         ''' Provides access to the default dictionary.
         ''' </summary>
-        Private Shared privateDefaultDictionary As SpellCheckerISpellDictionary
-        Public Shared Property DefaultDictionary() As SpellCheckerISpellDictionary
-            Get
-                Return privateDefaultDictionary
-            End Get
-            Private Set(ByVal value As SpellCheckerISpellDictionary)
-                privateDefaultDictionary = value
-            End Set
-        End Property
+        Public Shared Property DefaultDictionary As SpellCheckerISpellDictionary
         ''' <summary>
         ''' Provides access to the custom dictionary.
         ''' </summary>
-        Private Shared privateCustomDictionary As SpellCheckerCustomDictionary
-        Public Shared Property CustomDictionary() As SpellCheckerCustomDictionary
-            Get
-                Return privateCustomDictionary
-            End Get
-            Private Set(ByVal value As SpellCheckerCustomDictionary)
-                privateCustomDictionary = value
-            End Set
-        End Property
+        Public Shared Property CustomDictionary As SpellCheckerCustomDictionary
 
         ''' <summary>
         ''' Provides access to the spell checker component.
@@ -280,14 +264,14 @@ Namespace DevExpress.ExpressApp.SpellChecker
         ''' <summary>
         ''' Provides access to the underlying SpellCheckerBase object, the core of the spell checker component.
         ''' </summary>
-        <Browsable(False), EditorBrowsable(EditorBrowsableState.Never)> _
+        <Browsable(False), EditorBrowsable(EditorBrowsableState.Never)>
         Protected MustOverride ReadOnly Property SpellChecker() As SpellCheckerBase
         ''' <summary>
         ''' Provides access to the Options | SpellChecker node values in the Application Model.
         ''' </summary>
         Public ReadOnly Property SpellCheckerOptions() As IModelSpellChecker
             Get
-                Return DirectCast(Application.Model.Options, IModelOptionsSpellChecker).SpellChecker
+                Return (CType(Application.Model.Options, IModelOptionsSpellChecker)).SpellChecker
             End Get
         End Property
         ''' <summary>

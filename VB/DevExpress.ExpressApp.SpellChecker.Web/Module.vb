@@ -1,4 +1,5 @@
-﻿Imports System
+Imports Microsoft.VisualBasic
+Imports System
 Imports System.IO
 Imports System.Reflection
 Imports DevExpress.ExpressApp
@@ -10,11 +11,10 @@ Imports System.Threading.Tasks
 Imports DevExpress.Web.ASPxSpellChecker
 
 Namespace DevExpress.ExpressApp.SpellChecker.Web
-    Public NotInheritable Partial Class SpellCheckerAspNetModule
-        Inherits ModuleBase
-
-        Public Sub New()
-            InitializeComponent()
-        End Sub
-    End Class
+	Public NotInheritable Partial Class SpellCheckerAspNetModule
+		Inherits ModuleBase
+		Public Sub New()
+			InitializeComponent()
+		End Sub
+	End Class
 End Namespace
