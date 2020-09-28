@@ -13,6 +13,7 @@ Namespace DevExpress.ExpressApp.SpellChecker
         Private Shared lockObject As Object = New Object()
         Private Const ActiveKeyCanCheckSpelling As String = "CanCheckSpelling"
         Public Sub New()
+            Me.TargetWindowType = WindowType.Child
             CheckSpellingAction = New SimpleAction(Me, "CheckSpelling", PredefinedCategory.RecordEdit)
             CheckSpellingAction.Caption = "Check Spelling"
             CheckSpellingAction.ToolTip = "Check the spelling and grammar of text in the form."

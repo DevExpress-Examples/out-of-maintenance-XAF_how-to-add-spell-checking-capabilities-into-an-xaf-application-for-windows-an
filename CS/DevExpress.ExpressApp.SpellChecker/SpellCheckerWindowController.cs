@@ -11,6 +11,7 @@ namespace DevExpress.ExpressApp.SpellChecker {
         private static object lockObject = new object();
         private const string ActiveKeyCanCheckSpelling = "CanCheckSpelling";
         public SpellCheckerWindowController() {
+            this.TargetWindowType = WindowType.Child;
             CheckSpellingAction = new SimpleAction(this, "CheckSpelling", PredefinedCategory.RecordEdit);
             CheckSpellingAction.Caption = "Check Spelling";
             CheckSpellingAction.ToolTip = "Check the spelling and grammar of text in the form.";
