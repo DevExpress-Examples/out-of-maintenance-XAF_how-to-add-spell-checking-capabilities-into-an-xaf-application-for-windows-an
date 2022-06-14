@@ -82,7 +82,7 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DevExpress.ExpressApp.HtmlPropertyEditor.Win.v20.1, Version=20.1.14.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.ExpressApp.HtmlPropertyEditor.Win.v20.1, Version=20.1.15.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Data.Desktop.v20.1">
       <SpecificVersion>False</SpecificVersion>
     </Reference>
@@ -179,8 +179,8 @@
     <Reference Include="DevExpress.XtraRichEdit.v20.1">
       <SpecificVersion>False</SpecificVersion>
     </Reference>
-    <Reference Include="DevExpress.XtraSpellChecker.v20.1, Version=20.1.14.0, Culture=neutral, PublicKeyToken=B88D1754D700E49A, processorArchitecture=MSIL" />
-    <Reference Include="DevExpress.SpellChecker.v20.1.Core, Version=20.1.14.0, Culture=neutral, PublicKeyToken=B88D1754D700E49A, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraSpellChecker.v20.1, Version=20.1.15.0, Culture=neutral, PublicKeyToken=B88D1754D700E49A, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.SpellChecker.v20.1.Core, Version=20.1.15.0, Culture=neutral, PublicKeyToken=B88D1754D700E49A, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraVerticalGrid.v20.1">
       <SpecificVersion>False</SpecificVersion>
     </Reference>
